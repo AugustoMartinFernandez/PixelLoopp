@@ -1,0 +1,291 @@
+/* General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "VT323", monospace;
+  background: radial-gradient(circle, #121212, #1d1d1d, #000);
+  color: #00ffcc;
+  line-height: 1.6;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* App Container */
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  flex: 1; 
+}
+
+/* Header Styles */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #00ffcc;
+}
+
+header .app-title {
+  font-size: 3rem;
+  text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+}
+
+header .app-subtitle {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  color: #b0ffec;
+}
+
+header input {
+  font-size: 1rem;
+  padding: 10px;
+  border: 2px solid #00ffcc;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto;
+  display: block;
+  background-color: #1a1a1a;
+  color: #00ffcc;
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+header input:focus {
+  background-color: #333;
+}
+
+header .clear-button {
+  background-color: #00ffcc;
+  color: #121212;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+header .clear-button:hover {
+  background-color: #ff0080;
+  transform: scale(1.05);
+}
+
+/* Main Content */
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-grow: 1; /* Asegura que el main ocupe el espacio disponible */
+  padding-bottom: 60px;
+}
+
+.empty-message {
+  color: #ff0080;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+/* Card Grid */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+/* Card */
+.card {
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.7);
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.card p {
+  padding: 15px;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #00ffcc;
+  flex-grow: 1; /* Hace que el texto ocupe el espacio restante */
+  margin: 0;
+}
+
+/* Footer Styles */
+footer {
+  position: fixed; /* Fija el footer en la parte inferior de la pantalla */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #121212;
+  color: #b0ffec;
+  text-align: center;
+  padding: 10px 0;
+  border-top: 2px solid #00ffcc;
+  z-index: 100;
+}
+
+.social-links {
+  margin-bottom: 10px;
+}
+
+.social-links a {
+  margin: 0 10px;
+  color: #ff0080;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: #00ffcc;
+}
+
+.footer-text {
+  color: #b0ffec;
+  font-size: 0.9rem;
+}
+
+/* Categories Filters */
+.categories-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.category-filter {
+  background-color: #1a1a1a;
+  color: #00ffcc;
+  border: 2px solid #00ffcc;
+  border-radius: 25px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.category-filter:hover {
+  background-color: #333;
+  transform: scale(1.05);
+}
+
+.delete-category-button {
+  background-color: transparent;
+  border: none;
+  color: #ff3333;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.delete-category-button:hover {
+  color: #ff6666;
+}
+.delete-icon {
+  font-size: 1.5rem;
+  margin-left: 10px;
+}
+
+.category-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.clear-button {
+  background-color: #00ffcc;
+  color: #121212;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.clear-button:hover {
+  background-color: #ff0080;
+}
+
+/* Copiar Enlace Button */
+.copy-button {
+  background-color: #00ffcc;
+  color: #121212;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-align: center;
+  margin: 10px auto 15px; /* Centra el botón y le da un margen */
+  display: block; /* Asegura que el botón sea bloque y ocupe todo el ancho posible */
+  width: auto;
+}
+
+.copy-button:hover {
+  background-color: #ff0080;
+  transform: scale(1.05);
+}
+
+.copy-button:focus {
+  outline: none;
+}
+
+.copy-button:active {
+  transform: scale(1);
+}
+
+/* Cargando Spinner */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Centra verticalmente */
+  color: #00ffcc;
+}
+
+.spinner {
+  border: 8px solid #1a1a1a;  /* Fondo oscuro */
+  border-top: 8px solid #00ffcc; /* Color del borde superior (el spinner) */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+/* Animación de giro */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading p {
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
