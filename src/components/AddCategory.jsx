@@ -18,12 +18,14 @@ export const AddCategory = ({ onNewCategory }) => {
     <form onSubmit={onSubmit} className="add-category-form">
       <input
         type="text"
-        placeholder="Buscar GIFs..."
+        placeholder="Buscar categoría..."
         value={inputValue}
         onChange={onInputChange}
+        className="custom-search"
       />
+      <button type="submit" className="custom-button">
+        Agregar
+      </button>
     </form>
   );
 };
-
-

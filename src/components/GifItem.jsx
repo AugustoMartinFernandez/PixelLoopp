@@ -1,20 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 
-export const GifItem = ({ title, url }) => {
-  if (!url) return null; // Evita renderizar si no hay URL válida
+export const GifItem = ({ id, title, url, onDelete, showFavoriteButton = true }) => {
+  const [copied, setCopied] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
-  const [copied, setCopied] = useState(false); // Estado para manejar el mensaje de copia
+  useEffect(() => {
+    const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+    setIsFavorite(favoritos.some(fav => fav.id === id));
+  }, [id]);
+
+  const toggleFavorito = () => {
+    const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+    if (isFavorite) {
+      const nuevosFavoritos = favoritos.filter(fav => fav.id !== id);
+      localStorage.setItem('favoritos', JSON.stringify(nuevosFavoritos));
+      setIsFavorite(false);
+      if (onDelete) onDelete(); // Llamar a onDelete si se proporciona
+    } else {
+      const nuevosFavoritos = [...favoritos, { id, title, url }];
+      localStorage.setItem('favoritos', JSON.stringify(nuevosFavoritos));
+      setIsFavorite(true);
+    }
+  };
 
   const handleCopyLink = () => {
-    navigator.clipboard.writeText(url) // Copia la URL al portapapeles
-      .then(() => setCopied(true)) // Si la copia es exitosa, actualiza el estado
-      .catch((err) => console.error("Error al copiar el enlace: ", err)); // Maneja cualquier error
+    navigator.clipboard.writeText(url).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
   };
 
   return (
     <div className="card">
-      <img src={url} alt={title || "Imagen"} />
-      <p>{title || "Sin título"}</p>
+      <img src={url} alt={title} />
+      <p>{title}</p>
+      {showFavoriteButton && (
+        <button 
+          onClick={toggleFavorito} 
+          className={`favorite-button ${isFavorite ? 'active' : ''}`}
+        >
+          {isFavorite ? '❤️ Quitar de favoritos' : '🤍 Agregar a favoritos'}
+        </button>
+      )}
       <button onClick={handleCopyLink} className="copy-button">
         {copied ? "¡Enlace copiado!" : "Copiar enlace"}
       </button>

@@ -1,92 +1,107 @@
 import React, { useState, useEffect } from "react";
-import { AddCategory } from "./components/AddCategory";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import CustomNavBar from "./components/CustomNavBar";
 import { GifGrid } from "./components/GifGrid";
+import Favoritos from "./components/Favoritos";
+import Categorias from "./components/Categorias";
+import { Contacto } from "./components/Contacto";
+import { AddCategory } from "./components/AddCategory";
+import AnuncioModal from './components/AnuncioModal';
+
+
+const ShowCategories = ({ categories, removeCategory }) => {
+  return (
+    <div className="categories-container">
+      {categories.map((category) => (
+        <div key={category} className="category-filter">
+          <span>{category}</span>
+          <button
+            onClick={() => removeCategory(category)}
+            className="delete-category-button"
+            aria-label={`Eliminar categoría ${category}`}
+          >
+            ❌
+          </button>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 export const GifExpertApp = () => {
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState(() => {
+    return JSON.parse(localStorage.getItem("gif-categories")) || [];
+  });
+  const [selectedCategory, setSelectedCategory] = useState(() => {
+    return localStorage.getItem("selected-category") || "";
+  });
 
-  // Recupera las categorías del localStorage cuando se carga la página
   useEffect(() => {
-    const storedCategories = JSON.parse(localStorage.getItem("categories"));
-    if (storedCategories) {
-      setCategories(storedCategories);
+    localStorage.setItem("gif-categories", JSON.stringify(categories));
+  }, [categories]);
+
+  useEffect(() => {
+    localStorage.setItem("selected-category", selectedCategory);
+  }, [selectedCategory]);
+
+  const handleSearch = (query) => {
+    if (!categories.includes(query)) {
+      setCategories((prev) => [query, ...prev]);
     }
-  }, []);
-
-  // Función para agregar una nueva categoría
-  const onAddCategory = (newCategory) => {
-    if (categories.includes(newCategory)) return;
-    const updatedCategories = [newCategory, ...categories];
-    setCategories(updatedCategories);
-
-    // Guarda las categorías actualizadas en el localStorage
-    localStorage.setItem("categories", JSON.stringify(updatedCategories));
   };
 
-  // Función para limpiar todas las categorías
-  const clearCategories = () => {
-    setCategories([]);
-    localStorage.removeItem("categories"); // Elimina las categorías del localStorage
+  const removeCategory = (category) => {
+    setCategories((prev) => prev.filter((c) => c !== category));
   };
 
-  // Función para eliminar una categoría específica
-  const onDeleteCategory = (categoryToDelete) => {
-    const updatedCategories = categories.filter((category) => category !== categoryToDelete);
-    setCategories(updatedCategories);
-
-    // Guarda las categorías actualizadas en el localStorage
-    localStorage.setItem("categories", JSON.stringify(updatedCategories));
-  };
+  const location = useLocation();
 
   return (
     <div className="app-container">
-      <header>
-        <h1 className="app-title">PixelLoop</h1>
-        <p className="app-subtitle">Encuentra Tu GIF Perfecto</p>
-        <AddCategory onNewCategory={(value) => onAddCategory(value)} />
-        <button className="clear-button" onClick={clearCategories}>
-          Limpiar búsquedas
-        </button>
-      </header>
-
-      {/* Contenedor de filtros de categorías */}
-      <div className="categories-container">
-        {categories.map((category) => (
-          <div key={category} className="category-filter">
-            <span>{category}</span>
-            <button 
-              onClick={() => onDeleteCategory(category)} 
-              className="delete-category-button"
-              aria-label={`Eliminar categoría ${category}`}
-            >
-              ❌
-            </button>
-          </div>
-        ))}
-      </div>
-
+      <AnuncioModal />
+      <CustomNavBar onSearch={handleSearch} />
       <main>
-        {categories.length === 0 ? (
-          <div>
-            <h2 className="empty-message">¡Explora y encuentra el GIF perfecto!</h2>
-          </div>
-        ) : (
-          categories.map((category) => (
-            <GifGrid key={category} category={category} />
-          ))
+        {location.pathname === "/" && (
+          <header>
+            <h2 className="app-title">¡Encuentra Tu GIF Perfecto!</h2>
+            <ShowCategories categories={categories} removeCategory={removeCategory} />
+            <AddCategory onNewCategory={handleSearch} />
+          </header>
         )}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <GifGrid
+                categories={categories}
+                removeCategory={removeCategory}
+              />
+            }
+          />
+          <Route 
+            path="/categorias" 
+            element={
+              <Categorias 
+                onCategorySelect={handleSearch}
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
+              />
+            } 
+          />
+          <Route path="/favoritos" element={<Favoritos />} />
+          <Route path="/contacto" element={<Contacto />} />
+        </Routes>
       </main>
-
       <footer>
         <div className="social-links">
-          <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">
+          <a href="#" target="_blank" rel="noopener noreferrer">
+            Twitter
+          </a>
+          <a href="#" target="_blank" rel="noopener noreferrer">
             GitHub
           </a>
-          <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-            Facebook
-          </a>
-          <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
-            Instagram
+          <a href="#" target="_blank" rel="noopener noreferrer">
+            LinkedIn
           </a>
         </div>
         <p className="footer-text">
@@ -96,4 +111,3 @@ export const GifExpertApp = () => {
     </div>
   );
 };
-
