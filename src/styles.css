@@ -425,12 +425,12 @@ footer {
 
 .form-group input,
 .form-group textarea {
+  background-color: #E8F0FE;
   width: 100%;
   padding: 10px;
-  background-color: #1a1a1a;
   border: 2px solid #00ffcc;
   border-radius: 5px;
-  color: #fff;
+  color: black;
 }
 
 .submit-button {
@@ -555,7 +555,6 @@ footer {
 
 .custom-input,
 .custom-textarea {
-  background-color: #1a1a1a;
   border: 2px solid #00ffcc;
   color: #fff;
   padding: 10px;
