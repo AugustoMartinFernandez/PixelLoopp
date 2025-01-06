@@ -18,7 +18,7 @@ const CustomNavBar = () => {
     >
       <Container>
         <Navbar.Brand as={Link} to="/" className="nav-title" onClick={closeNav}>
-          GifExpertApp
+          Pixelloop
         </Navbar.Brand>
         <Navbar.Toggle
           aria-controls="navbarNav"

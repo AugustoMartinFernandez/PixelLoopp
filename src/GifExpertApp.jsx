@@ -94,13 +94,13 @@ export const GifExpertApp = () => {
       </main>
       <footer>
         <div className="social-links">
-          <a href="#" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.threads.net/@tinchoo_dev?invite=1" target="_blank" rel="noopener noreferrer">
             Twitter
           </a>
-          <a href="#" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.instagram.com/tinchoo_dev/profilecard/?igsh=ZXV4eGl3amgyYWE0" target="_blank" rel="noopener noreferrer">
             GitHub
           </a>
-          <a href="#" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.linkedin.com/in/tinchodev?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer">
             LinkedIn
           </a>
         </div>

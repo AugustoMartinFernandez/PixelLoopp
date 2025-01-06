@@ -50,7 +50,7 @@ const AnuncioModal = () => {
         <ul>
           <li>
             <a
-              href="https://twitter.com/tu_usuario"
+              href="https://www.threads.net/@tinchoo_dev?invite=1"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -59,7 +59,7 @@ const AnuncioModal = () => {
           </li>
           <li>
             <a
-              href="https://github.com/tu_usuario"
+              href="https://www.instagram.com/tinchoo_dev/profilecard/?igsh=ZXV4eGl3amgyYWE0"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -68,7 +68,7 @@ const AnuncioModal = () => {
           </li>
           <li>
             <a
-              href="https://linkedin.com/in/tu_usuario"
+              href="https://www.linkedin.com/in/tinchodev?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
               target="_blank"
               rel="noopener noreferrer"
             >
